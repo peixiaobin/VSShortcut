@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display</title>
+    <style>
+        /* 移除默认边距，让图片能紧贴边缘 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden; /* 防止左右滚动条 */
+            background-color: #000; /* 背景设为黑色，显得更沉浸 */
+        }
+
+        /* 容器用于包裹图片和按钮 */
+        .container {
+            position: relative; /* 关键：让按钮可以相对于这个容器定位 */
+            width: 100%;
+        }
+
+        /* 图片样式：宽度占满屏幕 */
+        img {
+            display: block;
+            width: 100%;
+            height: auto; /* 高度自动，保持比例 */
+        }
+
+        /* 按钮区域样式：绝对定位到右上角 */
+        .controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10; /* 确保按钮在图片上面 */
+            
+            /* 样式变得不起眼 */
+            background-color: rgba(255, 255, 255, 0.3); /* 半透明白色背景 */
+            padding: 5px;
+            border-radius: 20px;
+            transition: opacity 0.3s;
+        }
+
+        /* 鼠标移上去时，让控制栏稍微明显一点 */
+        .controls:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 按钮本体样式 */
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 12px; /* 字体改小 */
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 15px;
+            opacity: 0.7; /* 默认稍微透明 */
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+
+        /* 选中状态：加个淡淡的背景 */
+        button.active {
+            background-color: white;
+            color: black;
+            opacity: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="main-image" src="cn.jpg" alt="Content">
+
+        <div class="controls">
+            <button id="btn-cn" onclick="switchLanguage('cn')" class="active">中文</button>
+            <button id="btn-en" onclick="switchLanguage('en')">EN</button>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            const img = document.getElementById('main-image');
+            const btnCn = document.getElementById('btn-cn');
+            const btnEn = document.getElementById('btn-en');
+
+            if (lang === 'en') {
+                img.src = 'en.jpg';
+                btnEn.classList.add('active');
+                btnCn.classList.remove('active');
+            } else {
+                img.src = 'cn.jpg';
+                btnCn.classList.add('active');
+                btnEn.classList.remove('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
